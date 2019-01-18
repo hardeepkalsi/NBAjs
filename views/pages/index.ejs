@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <style>
+    table {
+      color: purple;
+    }
+    body {
+      background-color: gold
+    }
+  </style>
+    <meta charset="UTF-8">
+    <title>Box Score</title>
+  </head>
+  <body>
+    <table border="1">
+      <caption style="font-weight: bold">Lakers Box Score</caption>
+      <tr>
+        <th><%= data.resultSets[0].headers[5] + '\t' %></th>
+        <% for(var stat = 8; stat < data.resultSets[0].headers.length; stat++){ %>
+        <th><%= data.resultSets[0].headers[stat] %></th>
+        <% } %>
+      </tr>
+      <% for(var player in data.resultSets[0].rowSet){ %>
+        <tr>
+        <% for(var i=0; i < data.resultSets[0].rowSet[player].length; i++){ %>
+          <% if(i == 5 || i > 7){ %>
+              <td><%= data.resultSets[0].rowSet[player][i] %></td>
+          <% } %>
+          <% } %>
+        </tr>
+        <% } %>
+    </table>
+  </body>
+</html>
