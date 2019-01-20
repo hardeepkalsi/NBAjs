@@ -1,7 +1,25 @@
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+<style>
 
-<form action="check" method="POST">
+    form {
+        width: 300px;
+        margin: auto;
+        padding-top:20vh;
+    }
+
+    .center {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 30%;
+    }
+
+</style>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+<img class="center" " src="/images/nba.svg"  />
+<form  action="check" method="POST">
     <select name="team" class="ui dropdown">
+        <option value="" selected disabled hidden>Pick a team</option>
         <option value="1610612755">76ers</option>
         <option value="1610612757">Blazers</option>
         <option value="1610612749">Bucks</option>
