@@ -1,8 +1,13 @@
 const request = require('request');
 const express = require('express');
 const requestAPI = require('./requestAPI');
-const app = express();
 const bodyParser = require('body-parser');
+
+var app = express();
+
+// Allows Heroku environment to set port
+// Process.env has variables regarding users env
+var port = process.env.PORT || 8000;
 
 app.set('view engine', 'ejs');
 
@@ -28,6 +33,6 @@ app.get('/boxscore/:teamID', (req, res) => {
     });
 });
 
-var server = app.listen(8000, () => {
+var server = app.listen(port, () => {
     console.log('Listening on port: ' + server.address().port)
 });
