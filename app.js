@@ -2,18 +2,27 @@ const request = require('request');
 const express = require('express');
 const requestAPI = require('./requestAPI');
 const app = express();
+const bodyParser = require('body-parser');
 
 app.set('view engine', 'ejs');
 
+app.use(bodyParser.urlencoded({
+    extended: true
+  }));
 
 app.get('/', (req, res) => {
-    res.render('pages/index');
-})
+    res.render('pages/home');
+});
 
+app.post('/check', (req, res) => {
+    console.log('team entered')
+    // console.log(req.body.team)
+    res.redirect(`/boxscore/${req.body.team}`)
+});
 
-app.get('/get', (req, res) => {
-    var j = requestAPI.getStats((obj) => { // Added callback to be done after box score is retrieved, otherwise goes next and prints none
-        res.render('pages/index', {data: obj});
+app.get('/boxscore/:teamID', (req, res) => {
+    var j = requestAPI.getStats(req.params.teamID, (obj) => { // Added callback to be done after box score is retrieved, otherwise goes next and prints none
+        res.render('pages/boxscore', {data: obj});
     });
 });
 

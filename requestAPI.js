@@ -14,13 +14,15 @@ const options = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36',
         'Connection': 'keep-alive',
         'Accept-Encoding': '',
-        'Accept-Language': 'en-US,en;q=0.8'
-    }
+        'Accept-Language': 'en-US,en;q=0.8',
+    },
+    json: true,
+    method: 'GET'
   };
 
-function getStats(callback){
+function getStats(teamID, callback){
     
-    options.url = 'https://stats.nba.com/stats/teamgamelog?TeamID=1610612747&Season=2018-19&SeasonType=Regular Season';
+    options.url = `https://stats.nba.com/stats/teamgamelog?TeamID=${teamID}&Season=2018-19&SeasonType=Regular%20Season`;
     console.log(options.url);
 
     request.get(options, (err, res, body) => {
@@ -29,9 +31,9 @@ function getStats(callback){
             return;
         }
 
-        var j = JSON.parse(body);
+        var j = body;
         
-        options.url = 'https://stats.nba.com/stats/boxscoretraditionalv2?GameID=' + j.resultSets[0].rowSet[0][1] + '&StartPeriod=1&EndPeriod=4&StartRange=1&EndRange=4&RangeType=1'
+        options.url = `https://stats.nba.com/stats/boxscoretraditionalv2?GameID=${j.resultSets[0].rowSet[0][1]}&StartPeriod=1&EndPeriod=6&StartRange=1&EndRange=4&RangeType=1`;
         console.log(options.url);
 
         request.get(options, (err, res, body) => {
@@ -39,7 +41,7 @@ function getStats(callback){
                 console.log(err)
                 return;
             }
-            var j = JSON.parse(body);
+            var j = body;
     
             // process.stdout.write(j.resultSets[0].headers[5] + '\t');
     

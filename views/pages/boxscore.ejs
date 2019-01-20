@@ -3,7 +3,8 @@
   <head>
   <style>
     table {
-      color: purple;
+      color: black;
+      background-color: white
     }
     body {
       background-color: gold
@@ -11,10 +12,11 @@
   </style>
     <meta charset="UTF-8">
     <title>Box Score</title>
+    <% include ../partials/header %>
   </head>
   <body>
     <table border="1">
-      <caption style="font-weight: bold">Lakers Box Score</caption>
+      <caption style="font-weight: bold"><%= data.resultSets[1].rowSet[0][2] %> vs <%= data.resultSets[1].rowSet[1][2] %></caption>
       <tr>
         <th><%= data.resultSets[0].headers[5] + '\t' %></th>
         <% for(var stat = 8; stat < data.resultSets[0].headers.length; stat++){ %>
